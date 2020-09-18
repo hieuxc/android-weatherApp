@@ -3,166 +3,401 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/llMain"
-    android:background="@drawable/day"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@drawable/day"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:background="#80000000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <EditText
             android:id="@+id/editTextSearch"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:hint="city name" />
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="city"
+            android:paddingVertical="5dp"
+            android:paddingLeft="15dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#cccccc"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/buttonSearch"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_search_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Ha noi, VN"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textViewDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Tue 2/9"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewDay"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="20:20"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="29"
+                    android:textSize="70sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="°C"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textViewTemp"
+                    app:layout_constraintStart_toEndOf="@+id/textViewTemp"
+                    app:layout_constraintTop_toTopOf="@+id/textViewTemp"
+                    app:layout_constraintVertical_bias="0.212"
+                    tools:ignore="MissingConstraints" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageViewIcon"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewDes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:text="Nhiều mây"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="35dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Nhiệt độ cao nhất"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewTempMax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="6:30"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Mặt trời mọc"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewSunrise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="6:30"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Tốc độ gió"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewWind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="6:30"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Độ ẩm"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewHumidity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="6:30"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:background="@color/line" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="50dp"
+                android:background="@color/line">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="35dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Nhiệt độ thấp nhất"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewTempMin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="6:30"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Mặt trời lặn"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewSunset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="6:30"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Lượng mây"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewCloud"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="6:30"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="Áp suất"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textViewPressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="6:30"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="left"
+                    android:background="@color/line" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_content">
 
         <Button
-            android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
+            android:id="@+id/buttonChangeActivity"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Search" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:background="#4D000000"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textViewCity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Hà Nội,"
-            android:textColor="#fff"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textViewCountry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Việt Nam"
+            android:background="@android:color/transparent"
+            android:text="@string/btn_change_activity"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
             android:textSize="20sp" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageIcon"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/textViewTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:text="30do"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/textViewStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:text="Wind"
-        android:textSize="30sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/humidity" />
-
-            <TextView
-                android:id="@+id/textViewHumidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Độ ẩm"
-                android:textSize="20dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/cloud" />
-
-            <TextView
-                android:id="@+id/textViewCloud"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="mây"
-                android:textSize="20dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/wind" />
-
-            <TextView
-                android:id="@+id/textViewWind"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gió"
-                android:textSize="20dp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:text="Ngày câp nhật"
-        android:textColor="#00f"
-        android:textSize="25sp" />
-
-    <Button
-        android:id="@+id/buttonChangeActivity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Next day"
-        android:textSize="20sp" />
 </LinearLayout>

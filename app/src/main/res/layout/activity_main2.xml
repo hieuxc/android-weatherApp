@@ -11,13 +11,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_content">
 
         <TextView
             android:id="@+id/textViewCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:padding="10dp"
             android:text="Hà Nội,"
             android:textColor="#fff"
             android:textSize="20sp" />
@@ -26,15 +28,19 @@
             android:id="@+id/textViewCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:paddingVertical="10dp"
             android:text="Việt Nam"
             android:textColor="#fff"
             android:textSize="20sp" />
 
     </LinearLayout>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp" />
 
 </LinearLayout>

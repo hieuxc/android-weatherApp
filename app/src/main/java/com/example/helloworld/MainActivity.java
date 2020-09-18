@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,8 +34,10 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
     LinearLayout llMain;
     EditText editSearch;
-    Button btnSearch, btnChangeActivity;
-    TextView txtCity, txtCountry, txtTemp, txtStatus, txtHumidity, txtCloud, txtWind, txtDay;
+    Button btnChangeActivity;
+    ImageButton btnSearch;
+    TextView txtCity, txtTemp, txtDes, txtHumidity, txtCloud, txtWind, txtDay, txtTime, txtTempMax,
+            txtTempMin, txtSunrise, txtSunset, txtPressure;
     ImageView imgIcon;
 
     String CITY = "Ha noi";
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Mapping();
-        GetCurrentWeatherData("Ha noi");
+        GetCurrentWeatherData(CITY);
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void GetCurrentWeatherData(String data) {
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + data + "&units=metric&appid=d42b7179e2061f95601b64af5a5d5a32";
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + data + "&units=metric&lang=vi&appid=d42b7179e2061f95601b64af5a5d5a32";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @SuppressLint("SetTextI18n")
@@ -84,23 +88,43 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             jsonObject = new JSONObject(response);
-                            txtCity.setText(jsonObject.getString("name") + ",");
-                            txtCountry.setText(jsonObject.getJSONObject("sys").getString("country"));
+
+                            JSONObject jsonObjectSys = jsonObject.getJSONObject("sys");
+                            String country = jsonObjectSys.getString("country");
+                            txtCity.setText(jsonObject.getString("name") + ", " + country);
+
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatSun = new SimpleDateFormat("hh:mm");
+                            Date dateSunrise = new Date(jsonObjectSys.getLong("sunrise") * 1000l);
+                            Date dateSunset = new Date(jsonObjectSys.getLong("sunset") * 1000l);
+                            txtSunrise.setText(formatSun.format(dateSunrise)+" AM");
+                            txtSunset.setText(formatSun.format(dateSunset)+" PM");
 
                             JSONObject jsonObjectWeather = jsonObject.getJSONArray("weather").getJSONObject(0);
                             String icon = jsonObjectWeather.getString("icon");
                             Picasso.get().load("http://openweathermap.org/img/wn/" + icon + "@4x.png").into(imgIcon);
-                            txtStatus.setText(jsonObjectWeather.getString("main"));
+                            txtDes.setText(jsonObjectWeather.getString("description"));
 
-                            String temp = jsonObject.getJSONObject("main").getString("temp");
-                            txtTemp.setText(Double.valueOf(temp).intValue() + "°C");
-                            txtHumidity.setText(jsonObject.getJSONObject("main").getString("humidity") + "%");
+                            JSONObject jsonObjectMain = jsonObject.getJSONObject("main");
+                            Log.d("main:  ", jsonObjectMain.toString());
+
+                            int temp = Double.valueOf(jsonObjectMain.getString("temp")).intValue();
+                            int tempMax = Double.valueOf(jsonObjectMain.getString("temp_max")).intValue();
+                            int tempMin = Double.valueOf(jsonObjectMain.getString("temp_min")).intValue();
+                            txtTemp.setText(Integer.toString(temp));
+                            txtTempMax.setText(tempMax + "°C");
+                            txtTempMin.setText(tempMin + "°C");
+                            txtHumidity.setText(jsonObjectMain.getString("humidity") + "%");
+                            txtPressure.setText(jsonObjectMain.getString("pressure") + "hPa");
+
                             txtWind.setText(jsonObject.getJSONObject("wind").getString("speed") + "m/s");
                             txtCloud.setText(jsonObject.getJSONObject("clouds").getString("all") + "%");
 
                             Date date = new Date(jsonObject.getLong("dt") * 1000L);
-                            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE yyyy-MM-dd HH:mm:ss");
-                            txtDay.setText(simpleDateFormat.format(date));
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatDay = new SimpleDateFormat("EEEE d/M");
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatTime = new SimpleDateFormat("hh:mm");
+                            txtDay.setText(formatDay.format(date));
+                            txtTime.setText(formatTime.format(date));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -119,16 +143,21 @@ public class MainActivity extends AppCompatActivity {
     private void Mapping() {
         llMain = (LinearLayout) findViewById(R.id.llMain);
         editSearch = (EditText) findViewById(R.id.editTextSearch);
-        btnSearch = (Button) findViewById(R.id.buttonSearch);
+        btnSearch = (ImageButton) findViewById(R.id.buttonSearch);
         btnChangeActivity = (Button) findViewById(R.id.buttonChangeActivity);
         txtCity = (TextView) findViewById(R.id.textViewCity);
-        txtCountry = (TextView) findViewById(R.id.textViewCountry);
         txtTemp = (TextView) findViewById(R.id.textViewTemp);
-        txtStatus = (TextView) findViewById(R.id.textViewStatus);
+        txtDes = (TextView) findViewById(R.id.textViewDes);
         txtHumidity = (TextView) findViewById(R.id.textViewHumidity);
         txtCloud = (TextView) findViewById(R.id.textViewCloud);
         txtWind = (TextView) findViewById(R.id.textViewWind);
         txtDay = (TextView) findViewById(R.id.textViewDay);
-        imgIcon = (ImageView) findViewById(R.id.imageIcon);
+        txtTempMax = (TextView) findViewById(R.id.textViewTempMax);
+        txtTempMin = (TextView) findViewById(R.id.textViewTempMin);
+        txtSunrise = (TextView) findViewById(R.id.textViewSunrise);
+        txtSunset = (TextView) findViewById(R.id.textViewSunset);
+        txtPressure = (TextView) findViewById((R.id.textViewPressure));
+        txtTime = (TextView) findViewById(R.id.textViewTime);
+        imgIcon = (ImageView) findViewById(R.id.imageViewIcon);
     }
 }

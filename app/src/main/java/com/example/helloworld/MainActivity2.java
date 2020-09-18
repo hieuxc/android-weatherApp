@@ -92,7 +92,7 @@ public class MainActivity2 extends AppCompatActivity {
                                 JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
                                 Integer min = Double.valueOf(jsonObjectTemp.getString("min")).intValue();
                                 Integer max = Double.valueOf(jsonObjectTemp.getString("max")).intValue();
-                                String Temp = min + "° ~ " + max + "°";
+                                String Temp = max + "° ~ " + min + "°";
 
                                 JSONObject jsonObjectWeather = jsonObjectList.getJSONArray("weather").getJSONObject(0);
                                 String Status = jsonObjectWeather.getString("description");
